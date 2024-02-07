@@ -3,6 +3,79 @@
 @tailwind utilities;
 
 
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 100;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 01\ Thin.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 300;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 02\ Light.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: normal;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 03\ Regular.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 500;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 04\ Medium.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 600;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 05\ SemiBold.ttf') format('truetype');
+    font-display: block;
+
+}
+
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: bold;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 06\ Bold.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 800;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 07\ ExtraBold.ttf') format('truetype');
+    font-display: block;
+
+}
+
+@font-face {
+    font-family: "ravi";
+    font-style: normal;
+    font-weight: 900;
+    src: url('../public/assets/fonts/ravi/Ravi\ FA-EN\ 08\ Black.ttf') format('truetype');
+    font-display: block;
+
+}
+
 html {
     direction: rtl;
 }
@@ -26,4 +99,19 @@ input[type="number"]::-webkit-outer-spin-button {
 /* Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+@layer base{
+    html{
+        @apply font-ravi min-h-[100dvh] ;
+    }
+    .input{
+        @apply p-4 border border-texture ; 
+    }
+    .button-primary{
+        @apply text-white font-semibold px-7 py-2 bg-primary ;
+    }
+    .button-secondary{
+        @apply text-primary font-semibold px-7 py-2 bg-secondary ;
+    }
 }

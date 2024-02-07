@@ -6,11 +6,15 @@ module.exports = {
         './app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
+        fontFamily: {
+            ravi: ["ravi"],
+        },
         extend: {
-            colors:{
-                "primary":"#000",
-                "secondary":"#FFC453",
-                "texture":"#b4b4b4"
+            colors: {
+                "primary": "#000",
+                "secondary": "#FFC453",
+                "texture": "#b4b4b4",
+                "border-color":"#e0e0e0",
             }
         },
     },
