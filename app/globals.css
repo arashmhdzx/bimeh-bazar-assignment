@@ -96,22 +96,41 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
+ul {
+    list-style-type: none;
+}
+
 /* Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
 }
 
-@layer base{
-    html{
-        @apply font-ravi min-h-[100dvh] ;
+@layer base {
+    html {
+        @apply font-ravi min-h-[100dvh];
     }
-    .input{
-        @apply p-4 border border-texture ; 
+
+    .input {
+        @apply px-4 py-3 border border-texture;
     }
-    .button-primary{
-        @apply text-white font-semibold px-7 py-2 bg-primary ;
+
+    .button-primary {
+        @apply text-white font-semibold px-7 py-2 bg-primary;
     }
-    .button-secondary{
-        @apply text-primary font-semibold px-7 py-2 bg-secondary ;
+
+    .button-secondary {
+        @apply text-primary font-semibold px-7 py-2 bg-secondary;
+    }
+
+    .bottom-modal {
+        @apply fixed bottom-0 left-0 w-full flex flex-col justify-end h-full backdrop-blur-[1px] bg-black bg-opacity-40 transform transition-transform ease-out duration-300 translate-y-full;
+    }
+
+    .bottom-modal.open {
+        @apply translate-y-0;
+    }
+
+    .modal-content {
+        @apply p-4 h-3/4 bg-white flex flex-col;
     }
 }

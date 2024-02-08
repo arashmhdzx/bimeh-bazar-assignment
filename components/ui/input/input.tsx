@@ -25,11 +25,11 @@ const CustomInput: React.FC<CustomInputProps> = ({
         <div className="flex flex-col">
             <input
                 type={type}
-                className={`input my-4 ${errors[label]?.message ? "border-red-500 my-1" : ""}`}
+                className={`input my-4 ${errors[label]?.message ? "border-red-500  !mb-1" : ""}`}
                 placeholder={placeholder}
                 {...register(label as "nationalId" | "phoneNumber")} 
             />
-            <span className="text-red-500">
+            <span className="text-red-500 text-xs font-medium">
                 {errors[label]?.message}
             </span>
         </div>
