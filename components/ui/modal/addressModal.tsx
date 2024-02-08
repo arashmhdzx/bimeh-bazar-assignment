@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '../button';
 import AddressProps from '@/types/address';
 import { SelectAddress } from '../input';
+import CloseIcon from '@/components/icons/generals/close-icon';
 
 interface AddressModalProps {
     isOpen: boolean;
@@ -43,7 +44,9 @@ const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onRequestClose, sel
             <div className="modal-content">
                 <div className='flex justify-between items-center p-5'>
                     <p className='font-semibold'>انتخاب آدرس</p>
-                    <button onClick={onRequestClose}>X</button>
+                    <button onClick={onRequestClose} className='p-2'>
+                        <CloseIcon />
+                    </button>
                 </div>
                 <div className='h-full overflow-y-auto'>
                     {
