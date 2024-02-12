@@ -105,6 +105,26 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
+.checkbox-round {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 2px solid #C2C2C2;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+
+.checkbox-round:checked {
+    background-color: #2196F3;
+    color: white;
+    clip-path: circle(50% at 50% 50%);
+    vertical-align: middle;
+    appearance: auto;
+}
+
 @layer base {
     html {
         @apply font-ravi min-h-[100dvh];
@@ -134,7 +154,7 @@ input[type="number"] {
         @apply p-4 h-3/4 bg-white flex flex-col;
     }
 
-    .main{
-        @apply flex flex-col px-5 mt-10 mb-8 h-[78dvh] ;
+    .main {
+        @apply flex flex-col px-5 mt-10 mb-8 h-[78dvh];
     }
 }

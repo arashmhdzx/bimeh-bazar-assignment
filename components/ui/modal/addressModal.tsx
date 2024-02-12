@@ -10,7 +10,7 @@ interface AddressModalProps {
     isOpen: boolean;
     onRequestClose: () => void;
     selectedAddressHandler: (data: AddressProps) => void;
-    addresses: AddressProps[] | null;
+    addresses: AddressProps[] | null | undefined;
 }
 
 const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onRequestClose, selectedAddressHandler, addresses }) => {

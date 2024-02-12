@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 
 // components
-import Navbar from '@/components/ui/navbar/navbar'
 import Sections from '@/components/ui/section/sections'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -23,19 +22,13 @@ import { useRequestProcessor } from '@/hooks/useRequestProccessor';
 import { getAllAdresses } from '@/services/address';
 
 // types
-import SaveOrderRequest from '@/types/order'
 import AddressProps from '@/types/address';
 import { useRouter } from 'next/navigation';
+import { postNewOrder } from '@/services/order';
 
 
 export default function Home() {
 
-    const initialData = {
-        name: "شرکت نقش‌آفرینان شرق",
-        details: "فارس، شیراز، خیابان جمهوری، بالاتر از فلان، پلاک ۶، واحد ۲۳۴"
-    }
-
-    const [address, setAddress] = useState(Array.from({ length: 5 }, (_, index) => ({ ...initialData, id: (index + 1).toString() })))
     const [selectedAddress, setSelectedAddress] = useState<AddressProps | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,6 +45,22 @@ export default function Home() {
         resolver: yupResolver(userSchema),
     });
 
+    const { data } = Query('address-list', getAllAdresses);
+
+    const { mutate } = Mutate("storeOrders",
+    postNewOrder,
+        {
+            onSuccess: () => {
+                toastify("با موفقیت ثبت شد . تا چند ثانیه دیگر منتقل میشوید", "success")
+                setTimeout(() => {
+                        router.push("/success");
+                }, 2500)
+            },
+            onError: (data: any) => {
+                toastify(data.response.data.errors[0], "error")
+            }
+        }
+    )
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -60,8 +69,6 @@ export default function Home() {
         setIsModalOpen(false);
     };
 
-    // const { data } = Query('address-list',getAllAdresses)
-    // console.log(data)
 
     useEffect(() => {
         const cookieValue = document.cookie
@@ -70,7 +77,6 @@ export default function Home() {
             ?.split('=')[1];
 
         const formDataFromCookie = cookieValue ? JSON.parse(cookieValue) : null;
-        console.log(cookieValue)
         if (formDataFromCookie) {
             setValue('nationalId', formDataFromCookie.nationalId);
             setValue('phoneNumber', formDataFromCookie.phoneNumber);
@@ -78,14 +84,11 @@ export default function Home() {
         }
     }, [setValue]);
 
-    const onSubmit = (payload: UserSchemaType) => {
+    const onSubmit = async (payload: UserSchemaType) => {
 
         if (selectedAddress) {
-            document.cookie = `formData=${JSON.stringify({ ...payload, addressId: selectedAddress })}`;
-            toastify("با موفقیت ثبت شد . تا چند ثانیه دیگر منتقل میشوید", "success")
-            setTimeout(() => {
-                    router.push("/success");
-            }, 2500)
+            document.cookie = `formData=${JSON.stringify({ ...payload })}`;
+            mutate({ ...payload, addressId: selectedAddress.id })
         }
         else {
             toastify("لطفا آدرس را انتخاب کنید", "warning")
@@ -98,18 +101,18 @@ export default function Home() {
     return (
 
         <main className='main'>
-            <AddressModal addresses={address} selectedAddressHandler={selectedAddressHandler} isOpen={isModalOpen} onRequestClose={closeModal} />
+            <AddressModal addresses={data} selectedAddressHandler={selectedAddressHandler} isOpen={isModalOpen} onRequestClose={closeModal} />
             <Sections title='لطفا اطلاعات شخصی مالک خودرو را وارد کنید :' customClass='h-full' >
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col h-full'>
                     <div className='flex flex-col mb-4'>
-                        <Input errors={errors} register={register} label='nationalId' placeholder='کد ملی' />
-                        <Input errors={errors} register={register} label='phoneNumber' placeholder='شماره تلفن همراه' />
+                        <Input errors={errors} register={register} type='number' label='nationalId' placeholder='کد ملی' />
+                        <Input errors={errors} register={register} type='number' label='phoneNumber' placeholder='شماره تلفن همراه' />
                     </div>
-                    <Sections title='آدرس جهت درج روی بیمه نامه' titleFontWeight='semibold'>
+                    <Sections title='آدرس جهت درج روی بیمه نامه' customClass='mt-5' titleFontWeight='semibold'>
                         <div className='flex flex-col'>
                             {
                                 selectedAddress ?
-                                    <p>{selectedAddress.name}</p>
+                                    <p className='font-medium'>{selectedAddress.name}</p>
                                     :
                                     <p>لطفا آدرسی را که می‌خواهید روی بیمه‌نامه درج شود، وارد کنید.</p>
                             }
@@ -120,7 +123,7 @@ export default function Home() {
                         </div>
                     </Sections>
                     <div className='flex justify-end mt-auto'>
-                        <Button text="تایید و ادامه" type='submit' buttonStyle='button-primary' customStyle='w-fit' />
+                        <Button text="تایید و ادامه" type='submit' buttonStyle='button-primary' customStyle='w-fit my-8' />
                     </div>
                 </form>
             </Sections>

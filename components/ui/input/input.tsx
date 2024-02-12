@@ -1,7 +1,4 @@
-import { UserSchemaType, userSchema } from '@/components/validation/userSchema';
-import { yupResolver } from '@hookform/resolvers/yup';
 import React from 'react';
-import { useFormContext, Controller, useForm } from 'react-hook-form';
 
 interface CustomInputProps {
     label: "nationalId" | "phoneNumber";
@@ -22,14 +19,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
 
 
     return (
-        <div className="flex flex-col">
+        <div className={`flex flex-col`}>
             <input
                 type={type}
-                className={`input my-4 ${errors[label]?.message ? "border-red-500  !mb-1" : ""}`}
+                className={`input mt-0.5 mb-5 ${errors[label]?.message ? "border-[#E61F10]  !mb-1" : ""}`}
                 placeholder={placeholder}
                 {...register(label as "nationalId" | "phoneNumber")} 
             />
-            <span className="text-red-500 text-xs font-medium">
+            <span className="text-[#E61F10] text-xs font-medium">
                 {errors[label]?.message}
             </span>
         </div>
