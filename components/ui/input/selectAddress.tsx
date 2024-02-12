@@ -11,7 +11,7 @@ const SelectAddress: React.FC<SelectAddressProps> = ({ data, selected, onSelect 
     return (
         <li>
             <label className="flex flex-col">
-                <div className="flex items-center mb-1">
+                <div className="flex items-center mb-2">
                     <input type="checkbox" className="checkbox-round" onChange={() => onSelect(data)} checked={selected} />
                     <p className=" text-sm font-medium pr-3">{data.name}</p>
                 </div>

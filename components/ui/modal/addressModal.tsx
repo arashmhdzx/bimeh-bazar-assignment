@@ -42,7 +42,7 @@ const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onRequestClose, sel
     return (
         <div className={`bottom-modal ${isOpen ? 'open' : ''}`} style={modalStyle}>
             <div className="modal-content">
-                <div className='flex justify-between items-center p-5'>
+                <div className='address-header'>
                     <p className='font-semibold'>انتخاب آدرس</p>
                     <button onClick={onRequestClose} className='p-2'>
                         <CloseIcon />
@@ -51,7 +51,7 @@ const AddressModal: React.FC<AddressModalProps> = ({ isOpen, onRequestClose, sel
                 <div className='h-full overflow-y-auto'>
                     {
                         addresses ?
-                            <ul className='flex flex-col gap-y-3'>
+                            <ul className='flex flex-col gap-y-4 mt-4 px-[21.5px]'>
                                 {
                                     addresses.map((el, index) => (
                                         <SelectAddress key={index}

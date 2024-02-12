@@ -118,7 +118,7 @@ export default function Home() {
                             }
                             {
                                 selectedAddress ? null :
-                                    <Button buttonStyle='button-secondary' text='انتخاب از آدرس‌های من' customStyle='mt-3' onClick={() => openModal()} />
+                                    <Button buttonStyle='button-secondary' text='انتخاب از آدرس‌های من' customStyle='mt-6' onClick={() => openModal()} />
                             }
                         </div>
                     </Sections>

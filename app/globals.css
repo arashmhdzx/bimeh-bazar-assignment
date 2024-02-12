@@ -131,7 +131,7 @@ input[type="number"] {
     }
 
     .input {
-        @apply px-4 py-3 border border-texture;
+        @apply px-[13px] pb-[13px] pt-[14px] border border-texture;
     }
 
     .button-primary {
@@ -151,7 +151,11 @@ input[type="number"] {
     }
 
     .modal-content {
-        @apply p-4 h-3/4 bg-white flex flex-col;
+        @apply h-3/4 bg-white flex flex-col;
+    }
+
+    .address-header{
+        @apply flex justify-between items-center px-5 pt-6 pb-3 border-b border-border-color ;
     }
 
     .main {
